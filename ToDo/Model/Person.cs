@@ -8,9 +8,9 @@ namespace ToDo.Model
 {
     public class Person
     {
-        readonly int personId;
-        string firstName;
-        string lastName;
+      readonly int personId;
+      static string firstName;
+      static string lastName;
 
         public string FirstName {
             get
@@ -42,13 +42,14 @@ namespace ToDo.Model
                 lastName = value;
             }
         }
+        public int PersonId { get { return personId; } }
 
         public string FullName { get { return firstName + ' ' + lastName; } }
 
         public Person(string firstName, string lastName)
         {
-            FirstName = firstName;
-            LastName = lastName;
+           this.FirstName = firstName;
+           this. LastName = lastName;
         }
 
     }
