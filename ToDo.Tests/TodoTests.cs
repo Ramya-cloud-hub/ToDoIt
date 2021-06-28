@@ -12,14 +12,16 @@ namespace ToDo.Tests
             //Assign
             int todoId = 1;
             string description = "Create project";
-            Person person = new Person();
+            bool done = false;
 
             //Act
-            Todo ToDoObject = new Todo(todoId, description);
+            Todo toDoObject = new Todo(todoId, description);
 
             //Assert
-            Assert.Contains(todoId.ToString(), ToDoObject.TodoID.ToString());
-            Assert.Contains(description.ToString(), ToDoObject.Description.ToString());
+            Assert.Contains(todoId.ToString(), toDoObject.TodoID.ToString());
+            Assert.Contains(description.ToString(), toDoObject.Description.ToString());
+            Assert.Equal(done, toDoObject.Done);
+            Assert.Null(toDoObject.Assignee);
         }
     }
 }
