@@ -1,8 +1,4 @@
 ﻿using System;   
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToDo.Tests;                        
 using ToDo.Model;
 using Xunit;
@@ -15,17 +11,21 @@ namespace ToDo.Tests
         public void Person_Name_Test()
         {
             //Arrange
+            int id = 123;
             string firstName = "Ramya";
             string lastName = "Gowda";
 
             //Act
-            Person p1 = new Person(firstName, lastName);
+            Person p1 = new Person(firstName, lastName, id);
 
             //Assert
+            Assert.Contains(id.ToString(), p1.PersonId.ToString());
             Assert.Contains(firstName, p1.FirstName);
             Assert.Contains(lastName, p1.LastName);
             Assert.Equal(firstName, p1.FirstName);
-            Assert.Equal(lastName, p1.LastName);    
+            Assert.Equal(lastName, p1.LastName); 
+            
+            
         }        
     }
 }
