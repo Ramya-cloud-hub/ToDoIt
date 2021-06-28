@@ -25,8 +25,7 @@ namespace ToDo.Tests
             Assert.Contains(firstName, p1.FirstName);
             Assert.Contains(lastName, p1.LastName);
             Assert.Equal(firstName, p1.FirstName);
-            Assert.Equal(lastName, p1.LastName);
-            
+            Assert.Equal(lastName, p1.LastName);    
         }        
     }
 }
