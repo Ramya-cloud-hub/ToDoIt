@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDo.Model
 {
-    class Person
+    public class Person
     {
         readonly int personId;
         string firstName;
