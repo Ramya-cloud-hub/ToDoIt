@@ -14,10 +14,9 @@ namespace ToDo.Data
 
         public int Size()
         {
-            int length = personArr.Length;
-            return length;
+            return personArr.Length;
         }
-        public static Person[] FindAll()
+        public Person[] FindAll()
         {
             
             return personArr;
@@ -40,8 +39,10 @@ namespace ToDo.Data
             Person newPerson = new Person(firstName, lastName, personId);
 
             Person[] tempArray = personArr;
-            tempArray = new Person[tempArray.Length + 1];
-            tempArray[personArr.Length - 1] = newPerson;
+
+            personArr = new Person[tempArray.Length + 1];
+            tempArray.CopyTo(personArr, 0);
+            personArr[personArr.Length - 1] = newPerson;
 
             return newPerson;
         }

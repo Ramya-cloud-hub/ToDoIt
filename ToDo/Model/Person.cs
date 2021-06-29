@@ -8,7 +8,7 @@ namespace ToDo.Model
 {
     public class Person
     {
-      readonly int personId;
+      readonly int personid;
       string firstName;
       string lastName;
 
@@ -42,24 +42,16 @@ namespace ToDo.Model
                 lastName = value;
             }
         }
-        public int PersonId { get { return personId; } }
+        public int PersonId { get { return personid; } }
 
         public string FullName { get { return firstName + ' ' + lastName; } }
 
         public Person(string firstName, string lastName, int personId)
         {
-            this.personId = personId;
+            personid = personId;
             this.firstName = firstName;
             this. lastName = lastName;
-            bool isEmptyOrNullFirstName = string.IsNullOrEmpty(firstName);
-            bool isEmptyOrNullLastName = string.IsNullOrEmpty(lastName);
-
-            if (isEmptyOrNullFirstName || isEmptyOrNullLastName || personId == 0)
-             {
-                throw new ArgumentNullException(nameof(personId));
-                throw new ArgumentNullException(nameof(firstName));
-                throw new ArgumentNullException(nameof(lastName));
-            }
+           
         }
         
 
