@@ -15,8 +15,22 @@ namespace ToDo.Model
 
         public int TodoID { get { return todoId; } }
         public string Description { get { return description; } }
-        public bool Done { get { return done; } }
-        public Person Assignee { get { return assignee;  } }
+        public bool Done 
+        { 
+            get { return done; } 
+            set
+            {
+                done = value;
+            }
+        }
+        public Person Assignee 
+        { 
+            get { return assignee;  }
+            set
+            {
+                assignee = value;
+            }
+        }
 
         public Todo (int toDoId, string description)
 	    {
