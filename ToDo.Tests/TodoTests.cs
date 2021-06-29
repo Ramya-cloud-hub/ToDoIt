@@ -7,7 +7,7 @@ namespace ToDo.Tests
     public class TodoTests
     {
         [Fact]
-        public void CreateATodoObject()
+        public void Create_A_Todo_Object()
         {
             //Assign
             int todoId = 1;
