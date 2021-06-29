@@ -14,6 +14,11 @@ namespace ToDo.Tests
             string description = "Create project";
             bool done = false;
 
+            string firstName = "h";
+            string lastName = "j";
+
+            Person p1 = new Person(firstName, lastName);
+
             //Act
             Todo toDoObject = new Todo(todoId, description);
 
