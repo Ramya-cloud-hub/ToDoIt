@@ -53,7 +53,6 @@ namespace ToDo.Data
 
             return newTodo;
         }
-
         public void Clear()
         {
             //Array got a clear method. Instead of going through all the hassel of doing it ourselfs

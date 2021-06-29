@@ -10,7 +10,6 @@ namespace ToDo.Data
    public class People
     {
         static Person[] personArr = new Person[0];
-        int find = 0;
 
         public int Size()
         {
@@ -23,20 +22,22 @@ namespace ToDo.Data
         }
         public Person FindById(int personId)
         {
-
             Person findPersonById = null;
+
             foreach(Person person in personArr)
             {
                 if(person.PersonId == personId)
                 {
                     findPersonById = person;
+                    break;
                 }
             }
             return findPersonById;
         }
-        public Person CreatNewPerson(string firstName, string lastName, int personId)
+        public Person CreatNewPerson(string firstName, string lastName)
         {
-            Person newPerson = new Person(firstName, lastName, personId);
+           // Person newPerson = new Person(firstName, lastName, personId);
+            Person newPerson = new Person(firstName,lastName,PersonSequencer.NextPersonId());
 
             Person[] tempArray = personArr;
 
@@ -50,8 +51,12 @@ namespace ToDo.Data
         {
             Array.Clear(personArr, 0, personArr.Length);
             Array.Resize(ref personArr, 0);
+            PersonSequencer.Reset();
         }
-        
+        public void RemoveObject_FromPersonArray()
+        {
+
+        }
 
     }
 }
