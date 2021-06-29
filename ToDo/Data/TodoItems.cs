@@ -7,7 +7,7 @@ using ToDo.Model;
 
 namespace ToDo.Data
 {
-    class TodoItems
+    public class TodoItems
     {
         static Todo[] todoArray = new Todo[0];
 
@@ -26,11 +26,13 @@ namespace ToDo.Data
             Todo foundTheTodo = null;
 
             //Easiest to use foreach on an array when searching for specific item in it
+            //It breaks after finding the right one to stop looking through the rest
             foreach (Todo todo in todoArray)
             {
                 if(todo.TodoID == todoId)
                 {
                     foundTheTodo = todo;
+                    break;
                 }
             }
 
@@ -54,8 +56,10 @@ namespace ToDo.Data
 
         public void Clear()
         {
-            //Array got a clear method. Instead of going through all the hassel of doing it ourself
+            //Array got a clear method. Instead of going through all the hassel of doing it ourselfs
+            //The array keeps its size but every index ís null so we use Arrays resize to go back to the starting size of 0
             Array.Clear(todoArray, 0, todoArray.Length);
+            Array.Resize(ref todoArray, 0);
         }
     }
 }

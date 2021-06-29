@@ -7,17 +7,12 @@ namespace ToDo.Tests
     public class TodoTests
     {
         [Fact]
-        public void CreateATodoObject()
+        public void Create_A_Todo_Object()
         {
             //Assign
             int todoId = 1;
             string description = "Create project";
             bool done = false;
-
-            string firstName = "h";
-            string lastName = "j";
-
-            Person p1 = new Person(firstName, lastName);
 
             //Act
             Todo toDoObject = new Todo(todoId, description);
