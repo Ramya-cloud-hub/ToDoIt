@@ -28,6 +28,32 @@ namespace ToDo.Tests
             Assert.Null(nullArray);
         }
 
+        /// <summary>
+        /// Because the array in todoItems is static we check if the size we got back with todoItems.Size
+        /// is minimum of size 2 and max int.MaxValue to see if the todoItems.Size method works
+        /// </summary>
+        public void Size_Of_TodoArray()
+        {
+            //Assign
+            int id1 = 14;
+            int id2 = 15;
+            string discription1 = "Flute";
+            string discription2 = "Hamburger";
+
+            TodoItems todoList = new TodoItems();
+            todoList.CreateNewTodo(id1, discription1);
+            todoList.CreateNewTodo(id2, discription2);
+
+            int lowSize = 2;
+            int highSize = int.MaxValue;
+
+            //Act
+            int size = todoList.Size();
+
+            //Assert
+            Assert.InRange(size, lowSize, highSize);
+        }
+
         /*
         [Fact]
         public void CreateNewTodoTest()
@@ -55,35 +81,6 @@ namespace ToDo.Tests
             Assert.InRange(todoArray.Length, low, high);
         }
         */
-
-        /// <summary>
-        /// Tests both empty and notnull to make sure todoArray in todoItems is empty
-        /// and not null after TodoItems.Clear method.
-        /// </summary>
-        [Fact]
-        public void ClearTest()
-        {
-            //Assign
-            int id1 = 5;
-            int id2 = 6;
-            int id3 = 7;
-            string discription1 = "LL";
-            string discription2 = "JJ";
-            string discription3 = "KK";
-            TodoItems todoList = new TodoItems();
-            todoList.CreateNewTodo(id1, discription1);
-            todoList.CreateNewTodo(id2, discription2);
-            todoList.CreateNewTodo(id3, discription3);
-            int expectedArrayLegnth = 0;
-
-            //Act
-            todoList.Clear();
-
-            //Assert
-            Assert.Equal(expectedArrayLegnth, todoList.FindAll().Length);
-            Assert.Empty(todoList.FindAll());
-            Assert.NotNull(todoList.FindAll());
-        }
 
         /// <summary>
         /// Test both FindById method and CreateNewTodo method
@@ -131,6 +128,35 @@ namespace ToDo.Tests
 
             //Assert
             Assert.Null(todo);
+        }
+
+        /// <summary>
+        /// Tests both empty and notnull to make sure todoArray in todoItems is empty
+        /// and not null after TodoItems.Clear method.
+        /// </summary>
+        [Fact]
+        public void ClearTest()
+        {
+            //Assign
+            int id1 = 5;
+            int id2 = 6;
+            int id3 = 7;
+            string discription1 = "LL";
+            string discription2 = "JJ";
+            string discription3 = "KK";
+            TodoItems todoList = new TodoItems();
+            todoList.CreateNewTodo(id1, discription1);
+            todoList.CreateNewTodo(id2, discription2);
+            todoList.CreateNewTodo(id3, discription3);
+            int expectedArrayLegnth = 0;
+
+            //Act
+            todoList.Clear();
+
+            //Assert
+            Assert.Equal(expectedArrayLegnth, todoList.FindAll().Length);
+            Assert.Empty(todoList.FindAll());
+            Assert.NotNull(todoList.FindAll());
         }
     }
 }
