@@ -7,25 +7,6 @@ namespace ToDo.Tests
 {
     public class TodoItemsTests
     {
-        /*
-        [Fact]
-        public void TodoArray_Start_As_Empty()
-        {
-            //Arrange
-            TodoItems todoList = new TodoItems();
-            Todo[] todoArray;
-            Todo[] nullArray = null;
-
-            //Act
-            todoArray = todoList.FindAll();
-
-            //Assert
-            Assert.Empty(todoArray);
-            Assert.NotNull(todoArray);
-            Assert.Null(nullArray);
-        }
-        */
-
         [Fact]
         public void Size_Of_TodoArray()
         {
@@ -158,6 +139,7 @@ namespace ToDo.Tests
             int expectedArrayLegnth = 0;
 
             //Act
+            todoList.Clear();
             todoList.Clear();
 
             //Assert
