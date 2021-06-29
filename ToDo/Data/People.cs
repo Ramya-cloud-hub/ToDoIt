@@ -49,6 +49,7 @@ namespace ToDo.Data
         public void Clear()
         {
             Array.Clear(personArr, 0, personArr.Length);
+            Array.Resize(ref personArr, 0);
         }
         
 

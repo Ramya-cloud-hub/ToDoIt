@@ -65,8 +65,69 @@ namespace ToDo.Tests
              //Act
             person = people.FindById(id2);
 
-             //Assert
-            Assert.Null(person);          
+            //Assert
+            Assert.Null(person);
         }
-    }
+        /// <summary>
+        /// Testing The Clear fuction to test the PersonArray is empty and also it should not null
+        /// </summary>
+        [Fact]
+        public void Test_Clear_People()
+        {
+            //Arrange
+            int id1 = 123;
+            int id2 = 456;
+            int id3 = 789;
+            string firstName1 = "Srini";
+            string lastName1 = "Vasu";
+            string firstName2 = "Srini";
+            string lastName2= "Vasu";
+            string firstName3 = "Srini";
+            string lastName3 = "Vasu";
+            int expectedLegnth = 0;
+
+            People people = new People();
+            people.CreatNewPerson(firstName1, lastName1, id1);
+            people.CreatNewPerson(firstName2, lastName2, id2);
+            people.CreatNewPerson(firstName3, lastName3, id3);
+
+            //Act
+            people.Clear();
+            people.Clear();
+            
+
+            //Assert
+            Assert.Equal(expectedLegnth ,people.FindAll().Length);
+            Assert.Empty(people.FindAll());
+            Assert.NotNull(people.FindAll());
+        }
+        /// <summary>
+        /// Function to Check can we find the person my passing PersonId
+        /// </summary>
+        [Fact]
+        public void Find_PersonById_FoundRight()
+        {
+            //Arrange
+            int id1 = 123;
+            int id2 = 456;
+            string firstName = "Srinivasa";
+            string LastName = "Chakravarthy";
+            string firstName2 = "Shruthi";
+            string LastName2 = "Sogi";
+
+            People people = new People();
+
+            people.Clear();
+            people.CreatNewPerson(firstName, LastName,id1);
+            people.CreatNewPerson(firstName2,LastName2,id2);
+
+            Person person;
+
+            //Act
+            person = people.FindById(id1);
+
+            //Assert
+            Assert.Contains(id1.ToString(), person.PersonId.ToString());
+        }
+        }
 }
