@@ -391,5 +391,43 @@ namespace ToDo.Tests
             //Assert
             Assert.Empty(list);
         }
+
+
+        [Fact]
+        public void RemoveTodo_Removed()
+        {
+            //Arrange
+            TodoItems todoList = new TodoItems();
+
+            todoList.Clear();
+            todoList.CreateNewTodo("A");
+            todoList.CreateNewTodo("B");
+            todoList.CreateNewTodo("C");
+            todoList.CreateNewTodo("D");
+
+            //Act
+            bool done = todoList.RemoveTodo(2);
+
+            //Assert
+            Assert.True(done);
+        }
+        [Fact]
+        public void RemoveTodo_DidntFind()
+        {
+            //Arrange
+            TodoItems todoList = new TodoItems();
+
+            todoList.Clear();
+            todoList.CreateNewTodo("A");
+            todoList.CreateNewTodo("B");
+            todoList.CreateNewTodo("C");
+            todoList.CreateNewTodo("D");
+
+            //Act
+            bool done = todoList.RemoveTodo(9);
+
+            //Assert
+            Assert.False(done);
+        }
     }
 }

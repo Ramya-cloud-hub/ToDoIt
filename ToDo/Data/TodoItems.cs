@@ -134,5 +134,31 @@ namespace ToDo.Data
 
             return todosWithSameAssignee;
         }
+
+        public bool RemoveTodo(int todoId)
+        {
+            bool done = false;
+            Todo specificTodo = FindById(todoId);
+
+            if(!(specificTodo == null))
+            {
+                Todo[] tmpArray = new Todo[todoArray.Length];
+                int tmpArrayCounter = 0;
+
+                for (int i = 0; i < todoArray.Length; i++)
+                {
+                    if (todoArray[i] != specificTodo)
+                    {
+                        tmpArray[tmpArrayCounter] = todoArray[i];
+                        tmpArrayCounter++;
+                    }
+                }
+                todoArray = tmpArray;
+                Array.Resize(ref todoArray, todoArray.Length - 1);
+                done = true;
+            }
+
+            return done;
+        }
     }
 }
