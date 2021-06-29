@@ -156,7 +156,6 @@ namespace ToDo.Data
                 Array.Resize(ref todoArray, todoArray.Length - 1);
                 done = true;
             }
-
             return done;
         }
     }

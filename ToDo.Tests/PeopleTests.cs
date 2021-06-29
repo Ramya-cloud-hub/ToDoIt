@@ -31,22 +31,6 @@ namespace ToDo.Tests
             Assert.InRange(size, expectedSize, highSize);
         }
         [Fact]
-        public void Check_Empty_Person_Array_Test()
-        {
-            //Assert
-            People peopleList = new People();
-            Person[] personArray;
-            Person[] nullArray = null;
-
-            //Act
-            personArray = peopleList.FindAll();
-
-            //Assert
-            Assert.Empty(personArray);
-            Assert.NotNull(personArray);
-            Assert.Null(nullArray);
-        }
-        [Fact]
         public void FindById_DidntExist()
         {
             //Arrange
@@ -67,6 +51,31 @@ namespace ToDo.Tests
             Assert.Null(person);
         }
         [Fact]
+        public void FindById_FoundRight()
+        {
+            //Arrange
+            int id1 = 1;
+            string firstName1 = "abc";
+            string lastName1 = "xyz";
+            string firstName2 = "ABC";
+            string lastName2 = "XYZ";
+
+            People peopleList = new People();
+
+            peopleList.Clear();
+            peopleList.CreatNewPerson(firstName1, lastName1);
+            peopleList.CreatNewPerson(firstName2, lastName2);
+
+            Person person;
+
+            //Act
+            person = peopleList.FindById(id1);
+
+            //Assert
+            Assert.Contains(id1.ToString(), person.PersonId.ToString());
+            Assert.Contains(firstName1, person.FirstName);
+        }
+        [Fact]
         public void FindAll_Test()
         {
             //Arrange
@@ -85,6 +94,26 @@ namespace ToDo.Tests
             Assert.NotNull(personArray);
             Assert.NotEmpty(personArray);
             Assert.Equal(expectedSize, personArray.Length);
+        }
+        [Fact]
+        public void CreateNewPerson_Test()
+        {
+            //Arrange
+            int id = 1;
+            string firstName = "abc";
+            string lastName = "xyz";
+
+            People peopleList = new People();
+
+            peopleList.Clear();
+
+            //Act
+            peopleList.CreatNewPerson(firstName,lastName);
+
+            //Assert
+            Assert.Contains(id.ToString(), peopleList.FindAll()[0].PersonId.ToString());
+            Assert.Contains(firstName, peopleList.FindAll()[0].FirstName);
+            Assert.Contains(lastName, peopleList.FindAll()[0].LastName);
         }
         /// <summary>
         /// Testing The Clear fuction to test the PersonArray is empty and also it should not null
@@ -116,9 +145,42 @@ namespace ToDo.Tests
             Assert.Empty(people.FindAll());
             Assert.NotNull(people.FindAll());
         }
-        /// <summary>
-        /// Function to Check can we find the person my passing PersonId
-        /// </summary>
-    
+       
+        [Fact]
+        public void RemovePerson_Removed()
+        {
+            //Arrange
+            People peopleList = new People();
+
+            peopleList.Clear();
+            peopleList.CreatNewPerson("ABC", "abc");
+            peopleList.CreatNewPerson("XYZ", "xyz");
+            peopleList.CreatNewPerson("PQR", "pqr");
+           
+
+            //Act
+            bool isRemoved = peopleList.RemoveObject_FromPersonArray(1);
+
+            //Assert
+            Assert.True(isRemoved);
+        }
+        [Fact]
+        public void RemovePerson_DidntFind()
+        {
+            //Arrange
+            People peopleList = new People();
+
+            peopleList.Clear();
+            peopleList.CreatNewPerson("ABC", "abc");
+            peopleList.CreatNewPerson("XYZ", "xyz");
+            peopleList.CreatNewPerson("PQR", "pqr");
+
+            //Act
+            bool isFound = peopleList.RemoveObject_FromPersonArray(5);
+
+            //Assert
+            Assert.False(isFound);
+        }
+
     }
 }

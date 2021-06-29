@@ -53,8 +53,30 @@ namespace ToDo.Data
             Array.Resize(ref personArr, 0);
             PersonSequencer.Reset();
         }
-        public void RemoveObject_FromPersonArray()
+        public bool RemoveObject_FromPersonArray(int personId)
         {
+            
+            Person person = FindById(personId);
+            bool done = false;
+
+            if (!(person == null))
+            {
+                Person[] tmpArray = new Person[personArr.Length];
+                int tmpArrayCounter = 0;
+
+                for (int i = 0; i < personArr.Length; i++)
+                {
+                    if (personArr[i] != person)
+                    {
+                        tmpArray[tmpArrayCounter] = personArr[i];
+                        tmpArrayCounter++;
+                    }
+                }
+                personArr = tmpArray;
+                Array.Resize(ref personArr, personArr.Length - 1);
+                done = true;
+            }
+            return done;
 
         }
 
