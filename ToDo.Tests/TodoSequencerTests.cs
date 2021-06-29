@@ -9,12 +9,12 @@ namespace ToDo.Tests
         [Fact]
         public void TodoIdWorks()
         {
-            //Assign
+            //Arrange
             int id = 0;
             int expected = 1;
 
             //Act
-            id = TodoSequencer.nextTodoId();
+            id = TodoSequencer.NextTodoId();
 
             //Assert
             Assert.Equal(expected, id);
@@ -23,14 +23,14 @@ namespace ToDo.Tests
         [Fact]
         public void TodoIdResetWorks()
         {
-            //Assign
-            int tmp = TodoSequencer.nextTodoId();
-            int tmp2 = TodoSequencer.nextTodoId();
+            //Arrange
+            int tmp = TodoSequencer.NextTodoId();
+            int tmp2 = TodoSequencer.NextTodoId();
             int expected = 1;
 
             //Act
-            TodoSequencer.reset();
-            int result = TodoSequencer.nextTodoId();
+            TodoSequencer.Reset();
+            int result = TodoSequencer.NextTodoId();
 
             //Assert
             Assert.Equal(expected, result);
