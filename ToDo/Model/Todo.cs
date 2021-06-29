@@ -20,8 +20,8 @@ namespace ToDo.Model
 
         public Todo (int toDoId, string description)
 	    {
-            this.description = description;
             todoId = toDoId;
+            this.description = description;
         }
     }
 }
