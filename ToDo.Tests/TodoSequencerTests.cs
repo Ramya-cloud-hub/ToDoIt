@@ -9,7 +9,7 @@ namespace ToDo.Tests
         [Fact]
         public void TodoIdWorks()
         {
-            //Assign
+            //Arrange
             int id = 0;
             int expected = 1;
 
@@ -23,7 +23,7 @@ namespace ToDo.Tests
         [Fact]
         public void TodoIdResetWorks()
         {
-            //Assign
+            //Arrange
             int tmp = TodoSequencer.nextTodoId();
             int tmp2 = TodoSequencer.nextTodoId();
             int expected = 1;

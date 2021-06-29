@@ -9,7 +9,7 @@ namespace ToDo.Tests
         [Fact]
         public void Create_A_Todo_Object()
         {
-            //Assign
+            //Arrange
             int todoId = 1;
             string description = "Create project";
             bool done = false;

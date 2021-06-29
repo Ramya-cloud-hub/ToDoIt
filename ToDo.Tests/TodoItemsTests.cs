@@ -7,14 +7,11 @@ namespace ToDo.Tests
 {
     public class TodoItemsTests
     {
-        /// <summary>
-        /// Also tests if FindAll works because otherwise it cannot know if the array is empty
-        /// Creates an array and gives it null just as a benchmark
-        /// </summary>
+        /*
         [Fact]
         public void TodoArray_Start_As_Empty()
         {
-            //Assign
+            //Arrange
             TodoItems todoList = new TodoItems();
             Todo[] todoArray;
             Todo[] nullArray = null;
@@ -27,101 +24,109 @@ namespace ToDo.Tests
             Assert.NotNull(todoArray);
             Assert.Null(nullArray);
         }
+        */
 
-        /// <summary>
-        /// Because the array in todoItems is static we check if the size we got back with todoItems.Size
-        /// is minimum of size 2 and max int.MaxValue to see if the todoItems.Size method works
-        /// </summary>
+        [Fact]
         public void Size_Of_TodoArray()
         {
-            //Assign
+            //Arrange
+            int expectedSize = 2;
             int id1 = 14;
             int id2 = 15;
             string discription1 = "Flute";
             string discription2 = "Hamburger";
 
             TodoItems todoList = new TodoItems();
+
+            todoList.Clear();
             todoList.CreateNewTodo(id1, discription1);
             todoList.CreateNewTodo(id2, discription2);
-
-            int lowSize = 2;
-            int highSize = int.MaxValue;
 
             //Act
             int size = todoList.Size();
 
             //Assert
-            Assert.InRange(size, lowSize, highSize);
+            Assert.Equal(expectedSize, size);
         }
 
-        /*
         [Fact]
-        public void CreateNewTodoTest()
+        public void FindAll_Test()
         {
-            //Assign
-            int id1 = 1;
-            string discription1 = "GG";
-            int id2 = 3;
-            string discription2 = "Hello";
-            int low = 2;
-            int high = int.MaxValue;
+            //Arrange
+            int expectedSize = 1;
 
             TodoItems todoList = new TodoItems();
-            Todo[] todoArray;
+            Todo[] todoArray = null;
+
+            todoList.Clear();
+            todoList.CreateNewTodo(20, "Test");
 
             //Act
-            todoList.CreateNewTodo(id1, discription1);
-            todoList.CreateNewTodo(id2, discription2);
             todoArray = todoList.FindAll();
 
             //Assert
-            //Because todoArray in TodoItems are static, it will keep the Todo objects
-            //created in other test methods so we just check if its length is
-            //between 2 and int max value to know if anything got created in it.
-            Assert.InRange(todoArray.Length, low, high);
+            Assert.NotNull(todoArray);
+            Assert.NotEmpty(todoArray);
+            Assert.Equal(expectedSize, todoArray.Length);
         }
-        */
 
-        /// <summary>
-        /// Test both FindById method and CreateNewTodo method
-        /// </summary>
+        [Fact]
+        public void CreateNewTodo_Test()
+        {
+            //Arrange
+            int id = 1;
+            string discription = "GG";
+
+            TodoItems todoList = new TodoItems();
+
+            todoList.Clear();
+
+            //Act
+            todoList.CreateNewTodo(id, discription);
+
+            //Assert
+            Assert.Contains(id.ToString(), todoList.FindAll()[0].TodoID.ToString());
+            Assert.Contains(discription, todoList.FindAll()[0].Description);
+        }
+        
         [Fact]
         public void FindById_FoundRight()
         {
-            //Assign
+            //Arrange
             int id1 = 8;
             int id2 = 9;
             string discription1 = "RR";
             string discription2 = "HH";
 
             TodoItems todoList = new TodoItems();
+
+            todoList.Clear();
             todoList.CreateNewTodo(id1, discription1);
             todoList.CreateNewTodo(id2, discription2);
 
-            Todo expectedTodo = new Todo(id1, discription1);
             Todo todo;
 
             //Act
             todo = todoList.FindById(id1);
 
             //Assert
-            Assert.Equal(expectedTodo.TodoID, todo.TodoID);
-            Assert.Equal(expectedTodo.Description, todo.Description);
+            Assert.Contains(id1.ToString(), todo.TodoID.ToString());
+            Assert.Contains(discription1, todo.Description);
         }
 
         [Fact]
         public void FindById_DidntExist()
         {
-            //Assign
+            //Arrange
             int id1 = 11;
             int id2 = 99;
             string discription = "GGGGGG";
 
-            TodoItems todoList = new TodoItems();
-            todoList.CreateNewTodo(id1, discription);
-
-            Todo expectedTodo = new Todo(id1, discription);
             Todo todo;
+            TodoItems todoList = new TodoItems();
+
+            todoList.Clear();
+            todoList.CreateNewTodo(id1, discription);
 
             //Act
             todo = todoList.FindById(id2);
@@ -137,14 +142,16 @@ namespace ToDo.Tests
         [Fact]
         public void ClearTest()
         {
-            //Assign
+            //Arrange
             int id1 = 5;
             int id2 = 6;
             int id3 = 7;
             string discription1 = "LL";
             string discription2 = "JJ";
             string discription3 = "KK";
+
             TodoItems todoList = new TodoItems();
+
             todoList.CreateNewTodo(id1, discription1);
             todoList.CreateNewTodo(id2, discription2);
             todoList.CreateNewTodo(id3, discription3);
