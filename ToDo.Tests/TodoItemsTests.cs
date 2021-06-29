@@ -7,19 +7,25 @@ namespace ToDo.Tests
 {
     public class TodoItemsTests
     {
-        //Also tests if FindAll works
+        /// <summary>
+        /// Also tests if FindAll works because otherwise it cannot know if the array is empty
+        /// Creates an array and gives it null just as a benchmark
+        /// </summary>
         [Fact]
         public void TodoArray_Start_As_Empty()
         {
             //Assign
             TodoItems todoList = new TodoItems();
             Todo[] todoArray;
+            Todo[] nullArray = null;
 
             //Act
             todoArray = todoList.FindAll();
 
             //Assert
+            Assert.Empty(todoArray);
             Assert.NotNull(todoArray);
+            Assert.Null(nullArray);
         }
 
         /*
@@ -50,6 +56,10 @@ namespace ToDo.Tests
         }
         */
 
+        /// <summary>
+        /// Tests both empty and notnull to make sure todoArray in todoItems is empty
+        /// and not null after TodoItems.Clear method.
+        /// </summary>
         [Fact]
         public void ClearTest()
         {
