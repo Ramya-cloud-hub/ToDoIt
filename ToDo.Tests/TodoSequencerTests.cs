@@ -28,8 +28,8 @@ namespace ToDo.Tests
         public void IdResetWorks()
         {
             //Arrange
-            int id1 = TodoSequencer.NextTodoId();
-            int id2 = TodoSequencer.NextTodoId();
+            TodoSequencer.NextTodoId();
+            int before = TodoSequencer.NextTodoId();
             int expectedId = 1;
 
             //Act
@@ -38,7 +38,7 @@ namespace ToDo.Tests
 
             //Assert
             Assert.Equal(expectedId, result);
-            Assert.Equal(id1, result);
+            Assert.True(result < before);
         }
     }
 }
