@@ -15,7 +15,7 @@ namespace ToDo.Tests
             int expected = 1;
 
             //Act
-            personId = TodoSequencer.NextTodoId();
+            personId = PersonSequencer.NextPersonId();
 
             //Assert
             Assert.Equal(expected, personId);
