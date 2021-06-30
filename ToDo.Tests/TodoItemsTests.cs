@@ -140,17 +140,17 @@ namespace ToDo.Tests
             todoList.CreateNewTodo(discription2);
             todoList.CreateNewTodo(discription3);
             int expectedArrayLegnth = 0;
-            int todoSeqeuencerExpectedId = 1;
+            int todoSeqeuencerExpectedId = 0;
 
             //Act
             todoList.Clear();
             Todo[] list = todoList.FindAll();
 
             //Assert
+            Assert.Equal(todoSeqeuencerExpectedId, TodoSequencer.TodoId); //We check so the TodoSequencer is also reseted
             Assert.Equal(expectedArrayLegnth, list.Length);
             Assert.Empty(list);
             Assert.NotNull(list);
-            Assert.Equal(todoSeqeuencerExpectedId, TodoSequencer.NextTodoId()); //We check so the TodoSequencer is also reseted
             todoList.Clear();
         }
 
