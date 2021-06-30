@@ -9,7 +9,7 @@ namespace ToDo.Tests
     {
         ////////////////////////////////////////////////Step 9 Test Methods
         [Fact]
-        public void Size_Of_TodoArray()
+        public void SizeOfTodoArray()
         {
             //Arrange
             int expectedSize = 2;
@@ -30,7 +30,7 @@ namespace ToDo.Tests
         }
 
         [Fact]
-        public void FindAll_Test()
+        public void FindAllWorks()
         {
             //Arrange
             int expectedSize = 1;
@@ -51,7 +51,7 @@ namespace ToDo.Tests
         }
 
         [Fact]
-        public void CreateNewTodo_Test()
+        public void CreateNewTodoWorks()
         {
             //Arrange
             string expectedDiscription1 = "Create base class";

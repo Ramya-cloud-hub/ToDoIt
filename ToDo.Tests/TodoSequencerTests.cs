@@ -7,7 +7,7 @@ namespace ToDo.Tests
     public class TodoSequencerTests
     {
         [Fact]
-        public void TodoIdIncrementWorks()
+        public void IdIncrementWorks()
         {
             //Arrange
             int expected = 1;
@@ -25,7 +25,7 @@ namespace ToDo.Tests
 
 
         [Fact]
-        public void TodoIdResetWorks()
+        public void IdResetWorks()
         {
             //Arrange
             int id1 = TodoSequencer.NextTodoId();
