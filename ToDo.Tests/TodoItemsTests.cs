@@ -7,6 +7,7 @@ namespace ToDo.Tests
 {
     public class TodoItemsTests
     {
+        ////////////////////////////////////////////////Step 9 Test Methods
         [Fact]
         public void Size_Of_TodoArray()
         {
@@ -155,7 +156,8 @@ namespace ToDo.Tests
 
 
 
-
+        ////////////////////////////////////////////////Step 10 Test Methods
+        ////////////////////////////FindByDoneStatus test methods
         [Fact]
         public void FindByDoneStatus_Found_True()
         {
@@ -258,8 +260,7 @@ namespace ToDo.Tests
         }
 
 
-
-        
+        ////////////////////////////FindByAssignee(PersonId) test methods
         [Fact]
         public void FindByAssignee_PersonId_Found()
         {
@@ -317,7 +318,7 @@ namespace ToDo.Tests
         }
 
 
-        
+        ////////////////////////////FindByAssignee(Assignee) test methods
         [Fact]
         public void FindByAssignee_Assignee_Found()
         {
@@ -371,10 +372,9 @@ namespace ToDo.Tests
             //Assert
             Assert.Empty(list);
         }
-        
 
 
-
+        ////////////////////////////FindUnassignedTodoItems test methods
         [Fact]
         public void FindUnassignedTodoItems_Found()
         {
@@ -429,6 +429,8 @@ namespace ToDo.Tests
         }
 
 
+        ////////////////////////////////////////////////Step 11 Test Methods
+        ////////////////////////////Remove test methods
         [Fact]
         public void RemoveTodo_Removed()
         {

@@ -20,7 +20,7 @@ namespace ToDo.Tests
 
             //Assert
             Assert.Equal(expected, id);
-            Assert.True(id < id2);
+            Assert.NotEqual(id, id2);
         }
 
 

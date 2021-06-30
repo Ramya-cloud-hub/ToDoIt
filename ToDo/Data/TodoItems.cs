@@ -9,7 +9,7 @@ namespace ToDo.Data
 {
     public class TodoItems
     {
-        static Todo[] todoArray = new Todo[0];
+        static Todo[] todoArray = Array.Empty<Todo>();
 
         public int Size()
         {
