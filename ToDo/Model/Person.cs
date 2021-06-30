@@ -49,8 +49,8 @@ namespace ToDo.Model
         public Person(string firstName, string lastName, int personId)
         {
             personid = personId;
-            this.firstName = firstName;
-            this. lastName = lastName;
+            FirstName = firstName;
+            LastName = lastName;
            
         }
         

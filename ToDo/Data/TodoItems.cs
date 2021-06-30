@@ -43,12 +43,7 @@ namespace ToDo.Data
         {
             Todo newTodo = new Todo(TodoSequencer.NextTodoId(), description);
 
-            //To expand the current array, we need to save everything in it first
-            //Then we can create a new bigger array and copy over all the old Todo's
-            //Then add the new Todo
-            Todo[] tmpArray = todoArray;
-            todoArray = new Todo[tmpArray.Length+1];
-            tmpArray.CopyTo(todoArray, 0);
+            Array.Resize(ref todoArray, todoArray.Length + 1);
             todoArray[todoArray.Length - 1] = newTodo;
 
             return newTodo;
