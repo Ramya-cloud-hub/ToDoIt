@@ -10,19 +10,14 @@ namespace ToDo.Tests
         public void IdIncrementWorks()
         {
             //Arrange
-            int expected = 1;
 
-            TodoSequencer.Reset();
-            
             //Act
-            int id = TodoSequencer.NextTodoId();
-            int id2 = TodoSequencer.NextTodoId();
+            int before = TodoSequencer.TodoId;
+            int result = TodoSequencer.NextTodoId();
 
             //Assert
-            Assert.Equal(expected, id);
-            Assert.NotEqual(id, id2);
+            Assert.True(before < result);
         }
-
 
         [Fact]
         public void IdResetWorks()
