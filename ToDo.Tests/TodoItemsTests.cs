@@ -31,21 +31,16 @@ namespace ToDo.Tests
         public void FindAllWorks()
         {
             //Arrange
-            int expectedSize = 1;
-
             TodoItems todoList = new TodoItems();
-            Todo[] todoArray = null;
-
-            todoList.Clear();
-            todoList.CreateNewTodo("Test");
+            Todo expectedToExist = todoList.CreateNewTodo("Test");
 
             //Act
-            todoArray = todoList.FindAll();
+            Todo[]  todoArray = todoList.FindAll();
 
             //Assert
             Assert.NotNull(todoArray);
             Assert.NotEmpty(todoArray);
-            Assert.Equal(expectedSize, todoArray.Length);
+            Assert.Contains(expectedToExist, todoArray);
         }
 
         [Fact]
@@ -86,7 +81,7 @@ namespace ToDo.Tests
 
             todoList.Clear();
             Todo expectedTodo1 = todoList.CreateNewTodo(discription1);
-            todoList.CreateNewTodo(discription2);
+                                 todoList.CreateNewTodo(discription2);
             Todo expectedTodo3 = todoList.CreateNewTodo(discription3);
 
             //Act
