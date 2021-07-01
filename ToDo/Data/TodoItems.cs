@@ -82,7 +82,8 @@ namespace ToDo.Data
 
             foreach (Todo todo in todoArray)
             {
-                if (todo.Assignee.PersonId == personId)
+                //First check if Assignee is null because otherwise if we do todo.Assignee.PersonId on null it will crash
+                if (todo.Assignee != null && todo.Assignee.PersonId == personId)
                 {
                     todosWithSameAssignee[counter] = todo;
                     counter++;
@@ -95,18 +96,12 @@ namespace ToDo.Data
 
         public Todo[] FindByAssignee(Person assignee)
         {
-            Todo[] todosWithSameAssignee = new Todo[todoArray.Length];
-            int counter = 0;
+            Todo[] todosWithSameAssignee = null;
 
-            foreach (Todo todo in todoArray)
+            if (assignee != null)
             {
-                if (todo.Assignee.Equals(assignee))
-                {
-                    todosWithSameAssignee[counter] = todo;
-                    counter++;
-                }
+                todosWithSameAssignee = FindByAssignee(assignee.PersonId);
             }
-            Array.Resize(ref todosWithSameAssignee, counter);
 
             return todosWithSameAssignee;
         }
