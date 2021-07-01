@@ -143,16 +143,16 @@ namespace ToDo.Tests
             people.CreatNewPerson(firstName1, lastName1);
             people.CreatNewPerson(firstName2, lastName2);
             people.CreatNewPerson(firstName3, lastName3);
-
+            int personSeqeuencerExpectedId = 0;
             //Act
             people.Clear();
             Person[] peopleList = people.FindAll();
 
             //Assert
-            Assert.Equal(expectedLegnth, peopleList.Length);
+            Assert.Equal(personSeqeuencerExpectedId, PersonSequencer.PersonId);
             Assert.Empty(peopleList);
             Assert.NotNull(peopleList);
-            Assert.Equal(expectedLegnth, PersonSequencer.NextPersonId());
+            Assert.Equal(expectedLegnth,peopleList.Length);
             people.Clear();     
         }
 

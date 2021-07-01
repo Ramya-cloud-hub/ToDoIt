@@ -10,6 +10,7 @@ namespace ToDo.Data
    public class PersonSequencer
     {
         static int personId;
+        public static int PersonId { get { return personId; } }
 
         public static int NextPersonId()
         { 

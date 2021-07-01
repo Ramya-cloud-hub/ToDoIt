@@ -10,31 +10,30 @@ namespace ToDo.Tests
         [Fact]
         public void Check_Person_Id_Increment_Work()
         {
-            //Actual
-            int personId = 0;
-            int personId2 = 0;
-            int expected = 1;
+            //Arrange
+            int expected = PersonSequencer.PersonId;
 
             //Act
-            personId = PersonSequencer.NextPersonId();
-            personId2 = PersonSequencer.NextPersonId();
+            int actual = PersonSequencer.NextPersonId();
 
             //Assert
-            Assert.Equal(expected, personId);
-            Assert.NotEqual(personId, personId2);
+            Assert.True(expected < actual);
         }
         [Fact]
         public void Check_Person_Id_Reset_Work()
         {
-            int personId1= PersonSequencer.NextPersonId();
-            int personId2 = PersonSequencer.NextPersonId();
-            int expected = 1;
+            //Actual
+            PersonSequencer.NextPersonId();
+            int expected = PersonSequencer.NextPersonId();
+            int expectedId = 1;
 
+            //Act
             PersonSequencer.Reset();
-           int  personId3= PersonSequencer.NextPersonId();
+            int  actual= PersonSequencer.NextPersonId();
 
-            Assert.Equal(expected, personId3);
-            Assert.Equal(personId1, personId3);
+            //Assert
+            Assert.Equal(expectedId, actual);
+            Assert.True(actual < expected);
         }
     }
 }
