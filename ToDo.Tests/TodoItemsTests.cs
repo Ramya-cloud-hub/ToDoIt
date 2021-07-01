@@ -69,10 +69,8 @@ namespace ToDo.Tests
             //Assert
             Assert.Contains(expectedDiscription1, task1.Description);
             Assert.Contains(expectedDiscription2, task2.Description);
-
             Assert.Contains(task1, todos);
             Assert.Contains(task2, todos);
-
             Assert.NotEqual(task1.TodoID, task2.TodoID);
         }
 

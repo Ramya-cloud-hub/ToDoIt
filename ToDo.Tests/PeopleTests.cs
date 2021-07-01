@@ -17,7 +17,9 @@ namespace ToDo.Tests
             string firstName2 = "Mamatha";
             string lastName2 = "Koplu";
 
+
             People people = new People();
+            people.Clear();
             people.CreatNewPerson(firstName, lastName);
             people.CreatNewPerson(firstName2, lastName2);
 
@@ -29,6 +31,7 @@ namespace ToDo.Tests
 
             //Assert
             Assert.InRange(size, expectedSize, highSize);
+            Assert.Equal(expectedSize, size);
         }
         [Fact]
         public void FindById_DidntExist()
@@ -55,6 +58,7 @@ namespace ToDo.Tests
         {
             //Arrange
             int id1 = 1;
+            int id2 = 2;
             string firstName1 = "abc";
             string lastName1 = "xyz";
             string firstName2 = "ABC";
@@ -62,18 +66,18 @@ namespace ToDo.Tests
 
             People peopleList = new People();
 
-            peopleList.Clear();
-            peopleList.CreatNewPerson(firstName1, lastName1);
-            peopleList.CreatNewPerson(firstName2, lastName2);
+          peopleList.Clear();
+          Person person1  = peopleList.CreatNewPerson(firstName1, lastName1);
+          Person person2 = peopleList.CreatNewPerson(firstName2, lastName2);
 
-            Person person;
 
             //Act
-            person = peopleList.FindById(id1);
+            Person p1 = peopleList.FindById(id1);
+            Person p2 = peopleList.FindById(id2);
 
             //Assert
-            Assert.Contains(id1.ToString(), person.PersonId.ToString());
-            Assert.Contains(firstName1, person.FirstName);
+            Assert.Equal(person1, p1);
+            Assert.Equal(person2, p2);
         }
         [Fact]
         public void FindAll_Test()
@@ -99,21 +103,26 @@ namespace ToDo.Tests
         public void CreateNewPerson_Test()
         {
             //Arrange
-            int id = 1;
             string firstName = "abc";
             string lastName = "xyz";
+            string firstName1 = "shilpa";
+            string lastName1 = "Sunik";
 
             People peopleList = new People();
-
             peopleList.Clear();
 
             //Act
-            peopleList.CreatNewPerson(firstName,lastName);
+            Person person1 = peopleList.CreatNewPerson(firstName, lastName);
+            Person person2 = peopleList.CreatNewPerson(firstName1, lastName1);
+            Person[] lists = peopleList.FindAll();
 
             //Assert
-            Assert.Contains(id.ToString(), peopleList.FindAll()[0].PersonId.ToString());
-            Assert.Contains(firstName, peopleList.FindAll()[0].FirstName);
-            Assert.Contains(lastName, peopleList.FindAll()[0].LastName);
+            Assert.NotEqual(person1.PersonId, person2.PersonId);
+            Assert.Contains(firstName, person1.FirstName);
+            Assert.Contains(firstName1, person2.FirstName);
+            Assert.Contains(person1,lists);
+            Assert.Contains(person2, lists);
+            Assert.NotEqual(person1.PersonId, person2.PersonId);
         }
         /// <summary>
         /// Testing The Clear fuction to test the PersonArray is empty and also it should not null
@@ -137,14 +146,19 @@ namespace ToDo.Tests
 
             //Act
             people.Clear();
-            people.Clear();
-
+            Person[] peopleList = people.FindAll();
 
             //Assert
-            Assert.Equal(expectedLegnth, people.FindAll().Length);
-            Assert.Empty(people.FindAll());
-            Assert.NotNull(people.FindAll());
+            Assert.Equal(expectedLegnth, peopleList.Length);
+            Assert.Empty(peopleList);
+            Assert.NotNull(peopleList);
+            Assert.Equal(expectedLegnth, PersonSequencer.NextPersonId());
+            people.Clear();     
         }
+
+        /// <summary>
+        /// Here I am testing Remove function, weather the person is removed and when i remove he should not exits inside my database
+        /// </summary>
        
         [Fact]
         public void RemovePerson_Removed()
@@ -153,33 +167,45 @@ namespace ToDo.Tests
             People peopleList = new People();
 
             peopleList.Clear();
-            peopleList.CreatNewPerson("ABC", "abc");
-            peopleList.CreatNewPerson("XYZ", "xyz");
-            peopleList.CreatNewPerson("PQR", "pqr");
+            Person person1 =   peopleList.CreatNewPerson("ABC", "abc");
+            Person person2 = peopleList.CreatNewPerson("XYZ", "xyz");
+            Person person3 = peopleList.CreatNewPerson("PQR", "pqr");
+            int lengthOfList = 2;
            
 
             //Act
             bool isRemoved = peopleList.RemoveObject_FromPersonArray(1);
+            Person[] lists = peopleList.FindAll();
 
             //Assert
             Assert.True(isRemoved);
+            Assert.DoesNotContain(person1, lists); 
+            Assert.Equal(lengthOfList, lists.Length);
+            Assert.Contains(person2, lists);
+            Assert.Contains(person3, lists);
         }
         [Fact]
         public void RemovePerson_DidntFind()
         {
             //Arrange
             People peopleList = new People();
+            int peopleLength = 3;
 
             peopleList.Clear();
-            peopleList.CreatNewPerson("ABC", "abc");
-            peopleList.CreatNewPerson("XYZ", "xyz");
-            peopleList.CreatNewPerson("PQR", "pqr");
+            Person people1 =  peopleList.CreatNewPerson("ABC", "abc");
+            Person people2 = peopleList.CreatNewPerson("XYZ", "xyz");
+            Person people3 = peopleList.CreatNewPerson("PQR", "pqr");
 
             //Act
+            Person[] lists = peopleList.FindAll();
             bool isFound = peopleList.RemoveObject_FromPersonArray(5);
 
             //Assert
             Assert.False(isFound);
+            Assert.Contains(people1, lists);
+            Assert.Contains(people2, lists);
+            Assert.Contains(people3, lists);
+            Assert.Equal(peopleLength, lists.Length);
         }
 
     }

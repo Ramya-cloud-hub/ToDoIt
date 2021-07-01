@@ -12,13 +12,16 @@ namespace ToDo.Tests
         {
             //Actual
             int personId = 0;
+            int personId2 = 0;
             int expected = 1;
 
             //Act
             personId = PersonSequencer.NextPersonId();
+            personId2 = PersonSequencer.NextPersonId();
 
             //Assert
             Assert.Equal(expected, personId);
+            Assert.NotEqual(personId, personId2);
         }
         [Fact]
         public void Check_Person_Id_Reset_Work()
@@ -31,6 +34,7 @@ namespace ToDo.Tests
            int  personId3= PersonSequencer.NextPersonId();
 
             Assert.Equal(expected, personId3);
+            Assert.Equal(personId1, personId3);
         }
     }
 }
