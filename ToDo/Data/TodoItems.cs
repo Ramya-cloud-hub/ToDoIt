@@ -82,7 +82,9 @@ namespace ToDo.Data
 
             foreach (Todo todo in todoArray)
             {
-                if (todo.Assignee.PersonId == personId)
+                //First check if Assignee is null because otherwise if we do todo.Assignee.PersonId on null it will crash
+                if (todo.Assignee == null) { }
+                else if (todo.Assignee.PersonId == personId)
                 {
                     todosWithSameAssignee[counter] = todo;
                     counter++;
@@ -100,7 +102,9 @@ namespace ToDo.Data
 
             foreach (Todo todo in todoArray)
             {
-                if (todo.Assignee.Equals(assignee))
+                //First check if Assignee is null because otherwise if we do Assignee.Equals on null it will crash
+                if (todo.Assignee == null) { }
+                else if (todo.Assignee.Equals(assignee))
                 {
                     todosWithSameAssignee[counter] = todo;
                     counter++;
