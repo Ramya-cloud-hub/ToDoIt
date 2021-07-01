@@ -147,27 +147,25 @@ namespace ToDo.Tests
         {
             //Arrange
             TodoItems todoList = new TodoItems();
-
-            todoList.Clear();
+            
             Todo task1 = todoList.CreateNewTodo("Set A");
-            todoList.CreateNewTodo("Set B");
+            Todo task2 = todoList.CreateNewTodo("Set B");
             Todo task3 = todoList.CreateNewTodo("Set C");
-            todoList.CreateNewTodo("Set D");
+            Todo task4 = todoList.CreateNewTodo("Set D");
 
-            todoList.FindById(1).Done = true;
-            todoList.FindById(2).Done = false;
-            todoList.FindById(3).Done = true;
-            todoList.FindById(4).Done = false;
-
-            int expectedLength = 2;
+            todoList.FindById(task1.TodoID).Done = true;
+            todoList.FindById(task2.TodoID).Done = false;
+            todoList.FindById(task3.TodoID).Done = true;
+            todoList.FindById(task4.TodoID).Done = false;
 
             //Act
             Todo[] list = todoList.FindByDoneStatus(true);
 
             //Assert
-            Assert.Equal(expectedLength, list.Length);
-            Assert.True(list[0].Done);
-            Assert.True(list[1].Done);
+            for (int i = 0; i < list.Length; i++)
+            {
+                Assert.True(list[i].Done);
+            }
             Assert.Contains(task1, list);
             Assert.Contains(task3, list);
         }
@@ -177,27 +175,24 @@ namespace ToDo.Tests
             //Arrange
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
-            todoList.CreateNewTodo("A");
-            todoList.CreateNewTodo("B");
-            Todo task3 = todoList.CreateNewTodo("C");
-            Todo task4 = todoList.CreateNewTodo("D");
+            Todo task1 = todoList.CreateNewTodo("Mull A");
+            Todo task2 = todoList.CreateNewTodo("Mull B");
+            Todo task3 = todoList.CreateNewTodo("Mull C");
+            Todo task4 = todoList.CreateNewTodo("Mull D");
 
-            todoList.FindById(1).Done = true;
-            todoList.FindById(2).Done = true;
-            todoList.FindById(3).Done = false;
-            todoList.FindById(4).Done = false;
-
-            //Act
-            int expectedLength = 2;
+            todoList.FindById(task1.TodoID).Done = true;
+            todoList.FindById(task2.TodoID).Done = true;
+            todoList.FindById(task3.TodoID).Done = false;
+            todoList.FindById(task4.TodoID).Done = false;
 
             //Act
             Todo[] list = todoList.FindByDoneStatus(false);
 
             //Assert
-            Assert.Equal(expectedLength, list.Length);
-            Assert.False(list[0].Done);
-            Assert.False(list[1].Done);
+            for (int i = 0; i < list.Length; i++)
+            {
+                Assert.False(list[i].Done);
+            }
             Assert.Contains(task3, list);
             Assert.Contains(task4, list);
         }
@@ -209,15 +204,14 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
-            todoList.CreateNewTodo("B");
+            todoList.CreateNewTodo("Mhb");
+            todoList.CreateNewTodo("Mhc");
 
             todoList.FindById(1).Done = false;
             todoList.FindById(2).Done = false;
 
             //Act
             Todo[] list = todoList.FindByDoneStatus(true);
-
 
             //Assert
             Assert.Empty(list);
@@ -229,8 +223,8 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
-            todoList.CreateNewTodo("B");
+            todoList.CreateNewTodo("Abc");
+            todoList.CreateNewTodo("Bcd");
 
             todoList.FindById(1).Done = true;
             todoList.FindById(2).Done = true;
@@ -249,19 +243,19 @@ namespace ToDo.Tests
         public void FindByAssignee_PersonId_Found()
         {
             //Arrange
-            Person expectedPerson = new Person("Martin", "Berg", 1);
+            Person expectedAssignee = new Person("Martin", "Berg", 1);
             Person p2 = new Person("Gunilla", "Hillberh", 2);
 
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("Get A");
-            todoList.CreateNewTodo("Get B");
-            todoList.CreateNewTodo("Get C");
+            Todo task1 = todoList.CreateNewTodo("Get A");
+            Todo task2 = todoList.CreateNewTodo("Get B");
+            Todo task3 = todoList.CreateNewTodo("Get C");
 
-            todoList.FindById(1).Assignee = expectedPerson;
-            todoList.FindById(2).Assignee = p2;
-            todoList.FindById(3).Assignee = expectedPerson;
+            todoList.FindById(task1.TodoID).Assignee = expectedAssignee;
+            todoList.FindById(task2.TodoID).Assignee = p2;
+            todoList.FindById(task3.TodoID).Assignee = expectedAssignee;
 
             int expectedLength = 2;
 
@@ -271,11 +265,11 @@ namespace ToDo.Tests
             //Assert
             Assert.Equal(expectedLength, list.Length);
 
-            Assert.Equal(expectedPerson.PersonId, list[0].Assignee.PersonId);
-            Assert.Equal(expectedPerson, list[0].Assignee);
+            Assert.Equal(expectedAssignee.PersonId, list[0].Assignee.PersonId);
+            Assert.Equal(expectedAssignee, list[0].Assignee);
 
-            Assert.Equal(expectedPerson.PersonId, list[1].Assignee.PersonId);
-            Assert.Equal(expectedPerson, list[1].Assignee);
+            Assert.Equal(expectedAssignee.PersonId, list[1].Assignee.PersonId);
+            Assert.Equal(expectedAssignee, list[1].Assignee);
         }
        
         [Fact]
@@ -288,8 +282,8 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
-            todoList.CreateNewTodo("B");
+            todoList.CreateNewTodo("bAc");
+            todoList.CreateNewTodo("cBa");
 
             todoList.FindById(1).Assignee = p1;
             todoList.FindById(2).Assignee = p2;
@@ -313,9 +307,9 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
-            todoList.CreateNewTodo("B");
-            todoList.CreateNewTodo("C");
+            todoList.CreateNewTodo("mAk");
+            todoList.CreateNewTodo("kBc");
+            todoList.CreateNewTodo("iCo");
 
             todoList.FindById(1).Assignee = p1;
             todoList.FindById(2).Assignee = expectedPerson;
@@ -342,9 +336,9 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
-            todoList.CreateNewTodo("B");
-            todoList.CreateNewTodo("C");
+            todoList.CreateNewTodo("At");
+            todoList.CreateNewTodo("By");
+            todoList.CreateNewTodo("Car");
 
             todoList.FindById(1).Assignee = p1;
             todoList.FindById(2).Assignee = p1;
@@ -369,7 +363,7 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
+            todoList.CreateNewTodo("Ayy");
             Todo exepectedTask1 = todoList.CreateNewTodo("B");
             Todo exepectedTask2 = todoList.CreateNewTodo("C");
 
@@ -400,7 +394,7 @@ namespace ToDo.Tests
             TodoItems todoList = new TodoItems();
 
             todoList.Clear();
-            todoList.CreateNewTodo("A");
+            todoList.CreateNewTodo("Yayyy");
 
             todoList.FindById(1).Assignee = p1;
 
@@ -444,9 +438,6 @@ namespace ToDo.Tests
         public void RemoveTodo_DidntFind()
         {
             //Arrange
-            
-            //int expectedLength = 3;
-
             TodoItems todoList = new TodoItems();
 
             todoList.CreateNewTodo("Y");
