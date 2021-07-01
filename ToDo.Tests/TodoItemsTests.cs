@@ -12,21 +12,19 @@ namespace ToDo.Tests
         public void SizeOfTodoArray()
         {
             //Arrange
-            int expectedSize = 2;
             string discription1 = "Flute";
             string discription2 = "Hamburger";
 
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
+            //Act
+            int sizeBefore = todoList.Size();
             todoList.CreateNewTodo(discription1);
             todoList.CreateNewTodo(discription2);
-
-            //Act
-            int size = todoList.Size();
+            int sizeAfter = todoList.Size();
 
             //Assert
-            Assert.Equal(expectedSize, size);
+            Assert.True(sizeBefore < sizeAfter);
         }
 
         [Fact]
