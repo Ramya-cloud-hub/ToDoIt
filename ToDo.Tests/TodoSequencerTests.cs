@@ -7,29 +7,24 @@ namespace ToDo.Tests
     public class TodoSequencerTests
     {
         [Fact]
-        public void TodoIdIncrementWorks()
+        public void IdIncrementWorks()
         {
             //Arrange
-            int expected = 1;
 
-            TodoSequencer.Reset();
-            
             //Act
-            int id = TodoSequencer.NextTodoId();
-            int id2 = TodoSequencer.NextTodoId();
+            int before = TodoSequencer.TodoId;
+            int result = TodoSequencer.NextTodoId();
 
             //Assert
-            Assert.Equal(expected, id);
-            Assert.NotEqual(id, id2);
+            Assert.True(before < result);
         }
 
-
         [Fact]
-        public void TodoIdResetWorks()
+        public void IdResetWorks()
         {
             //Arrange
-            int id1 = TodoSequencer.NextTodoId();
-            int id2 = TodoSequencer.NextTodoId();
+            TodoSequencer.NextTodoId();
+            int before = TodoSequencer.NextTodoId();
             int expectedId = 1;
 
             //Act
@@ -38,7 +33,7 @@ namespace ToDo.Tests
 
             //Assert
             Assert.Equal(expectedId, result);
-            Assert.Equal(id1, result);
+            Assert.True(result < before);
         }
     }
 }

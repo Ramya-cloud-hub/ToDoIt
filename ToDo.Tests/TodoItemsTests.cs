@@ -9,7 +9,7 @@ namespace ToDo.Tests
     {
         ////////////////////////////////////////////////Step 9 Test Methods
         [Fact]
-        public void Size_Of_TodoArray()
+        public void SizeOfTodoArray()
         {
             //Arrange
             int expectedSize = 2;
@@ -30,7 +30,7 @@ namespace ToDo.Tests
         }
 
         [Fact]
-        public void FindAll_Test()
+        public void FindAllWorks()
         {
             //Arrange
             int expectedSize = 1;
@@ -51,7 +51,7 @@ namespace ToDo.Tests
         }
 
         [Fact]
-        public void CreateNewTodo_Test()
+        public void CreateNewTodoWorks()
         {
             //Arrange
             string expectedDiscription1 = "Create base class";
@@ -138,17 +138,17 @@ namespace ToDo.Tests
             todoList.CreateNewTodo(discription2);
             todoList.CreateNewTodo(discription3);
             int expectedArrayLegnth = 0;
-            int todoSeqeuencerExpectedId = 1;
+            int todoSeqeuencerExpectedId = 0;
 
             //Act
             todoList.Clear();
             Todo[] list = todoList.FindAll();
 
             //Assert
+            Assert.Equal(todoSeqeuencerExpectedId, TodoSequencer.TodoId); //We check so the TodoSequencer is also reseted
             Assert.Equal(expectedArrayLegnth, list.Length);
             Assert.Empty(list);
             Assert.NotNull(list);
-            Assert.Equal(todoSeqeuencerExpectedId, TodoSequencer.NextTodoId()); //We check so the TodoSequencer is also reseted
             todoList.Clear();
         }
 

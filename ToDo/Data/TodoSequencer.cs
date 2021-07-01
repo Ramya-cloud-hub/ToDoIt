@@ -11,6 +11,8 @@ namespace ToDo.Data
     {
         static int todoId;
 
+        public static int TodoId { get { return todoId; } }
+
         public static int NextTodoId()
         {
             return ++todoId;
