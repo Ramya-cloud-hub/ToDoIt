@@ -376,6 +376,21 @@ namespace ToDo.Tests
         }
 
         [Fact]
+        public void FindbyAssignee_Assignee_SendInNull()
+        {
+            //Arrange
+            Person nullPerson = null;
+
+            TodoItems todoList = new TodoItems();
+
+            //Act
+            Todo[] list = todoList.FindByAssignee(nullPerson);
+
+            //Assert
+            Assert.Null(list);
+        }
+
+        [Fact]
         public void FindByAssignee_Assignee_NotFound()
         {
             //Arrange
