@@ -52,8 +52,6 @@ namespace ToDo.Tests
 
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
-
             //Act
             Todo task1 = todoList.CreateNewTodo(expectedDiscription1);
             Todo task2 = todoList.CreateNewTodo(expectedDiscription2);
@@ -71,39 +69,35 @@ namespace ToDo.Tests
         public void FindById_FoundRight()
         {
             //Arrange
-            int id1 = 1;
-            int id3 = 3;
             string discription1 = "Set more objects";
             string discription2 = "Get more trains";
             string discription3 = "Create new class";
 
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
             Todo expectedTodo1 = todoList.CreateNewTodo(discription1);
                                  todoList.CreateNewTodo(discription2);
-            Todo expectedTodo3 = todoList.CreateNewTodo(discription3);
+            Todo expectedTodo2 = todoList.CreateNewTodo(discription3);
 
             //Act
-            Todo todo1 = todoList.FindById(id1);
-            Todo todo3 = todoList.FindById(id3);
+            Todo todo1 = todoList.FindById(expectedTodo1.TodoID);
+            Todo todo2 = todoList.FindById(expectedTodo2.TodoID);
 
             //Assert
             Assert.Equal(expectedTodo1, todo1);
-            Assert.Equal(expectedTodo3, todo3);
+            Assert.Equal(expectedTodo2, todo2);
         }
 
         [Fact]
         public void FindById_DidntExist()
         {
             //Arrange
-            int id2 = 99;
+            int id2 = 9999;
             string discription = "GGGGGG";
 
             Todo todo;
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
             todoList.CreateNewTodo(discription);
 
             //Act
@@ -142,7 +136,6 @@ namespace ToDo.Tests
             Assert.Equal(expectedArrayLegnth, list.Length);
             Assert.Empty(list);
             Assert.NotNull(list);
-            todoList.Clear();
         }
 
 
@@ -426,23 +419,21 @@ namespace ToDo.Tests
         public void RemoveTodo_Removed()
         {
             //Arrange
-            int expectedLength = 3;
-
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
             Todo todoExpectedToStay1 = todoList.CreateNewTodo("A");
             Todo todoExpectedRemoved = todoList.CreateNewTodo("B");
             Todo todoExpectedToStay2 = todoList.CreateNewTodo("C");
             Todo todoExpectedToStay3 = todoList.CreateNewTodo("D");
 
             //Act
-            bool done = todoList.RemoveTodo(2);
+            int sizeBefore = todoList.Size();
+            bool done = todoList.RemoveTodo(todoExpectedRemoved.TodoID);
             Todo[] list = todoList.FindAll();
 
             //Assert
             Assert.True(done);
-            Assert.Equal(expectedLength, list.Length);
+            Assert.True(sizeBefore >  list.Length);
             Assert.DoesNotContain(todoExpectedRemoved, list);
 
             Assert.Contains(todoExpectedToStay1, list);
@@ -453,28 +444,23 @@ namespace ToDo.Tests
         public void RemoveTodo_DidntFind()
         {
             //Arrange
-            int expectedLength = 4;
+            
+            //int expectedLength = 3;
 
             TodoItems todoList = new TodoItems();
 
-            todoList.Clear();
-            Todo todoExpectedToStay1 = todoList.CreateNewTodo("A");
-            Todo todoExpectedToStay2 = todoList.CreateNewTodo("B");
-            Todo todoExpectedToStay3 = todoList.CreateNewTodo("C");
-            Todo todoExpectedToStay4 = todoList.CreateNewTodo("D");
+            todoList.CreateNewTodo("Y");
+            todoList.CreateNewTodo("U");
+            todoList.CreateNewTodo("O");
 
             //Act
-            bool done = todoList.RemoveTodo(9);
             Todo[] list = todoList.FindAll();
+            bool done = todoList.RemoveTodo(999);
+            Todo[] list2 = todoList.FindAll();
 
             //Assert
             Assert.False(done);
-            Assert.Equal(expectedLength, list.Length);
-
-            Assert.Contains(todoExpectedToStay1, list);
-            Assert.Contains(todoExpectedToStay2, list);
-            Assert.Contains(todoExpectedToStay3, list);
-            Assert.Contains(todoExpectedToStay4, list);
+            Assert.Equal(list, list2);
         }
     }
 }
