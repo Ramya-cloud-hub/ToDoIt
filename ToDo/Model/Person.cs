@@ -21,7 +21,9 @@ namespace ToDo.Model
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("Empty or only White space is not allowed");
+                    Console.WriteLine(value +"hvdj");
+                   throw new ArgumentException("Empty or only White space is not allowed");
+                   
                 }
                 firstName = value;
             }
