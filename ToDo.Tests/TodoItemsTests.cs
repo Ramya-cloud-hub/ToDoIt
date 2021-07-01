@@ -333,7 +333,6 @@ namespace ToDo.Tests
 
             TodoItems todoList = new TodoItems();
 
-           //todoList.Clear();
             Todo task1 = todoList.CreateNewTodo("mAk");
             Todo task2 = todoList.CreateNewTodo("kBc");
             Todo task3 = todoList.CreateNewTodo("iCo");
@@ -361,7 +360,6 @@ namespace ToDo.Tests
 
             TodoItems todoList = new TodoItems();
 
-            //todoList.Clear();
                          todoList.CreateNewTodo("Vroom");
             Todo task2 = todoList.CreateNewTodo("Zoom");
 
